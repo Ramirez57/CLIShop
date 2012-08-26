@@ -16,9 +16,9 @@ commands:
     permission: cs.admin
     permission-message: You do not have permission.
 permissions:
-  cs.player:
+  clishop.player:
     description: Permission to use the master player command.
     default: true
-  cs.admin:
+  clishop.admin:
     description: Permission to use the master admin command.
     default: op
