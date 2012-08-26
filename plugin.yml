@@ -1,0 +1,24 @@
+name: CLIShop
+description: Command-based free market.
+version: 0.1_MC1.3.1_R2.0
+main: ramirez57.CLIShop.Main
+author: Ramirez57
+depend: [Vault]
+commands:
+  cs:
+    description: Master command for players
+    usage: Type /cs help for help on CLIShop.
+    permission: cs.player
+    permission-message: You do not have permission.
+  csadmin:
+    description: Master command for OPs
+    usage: /csadmin reload
+    permission: cs.admin
+    permission-message: You do not have permission.
+permissions:
+  cs.player:
+    description: Permission to use the master player command.
+    default: true
+  cs.admin:
+    description: Permission to use the master admin command.
+    default: op

@@ -1,0 +1,1 @@
+CLIShop is a Bukkit plugin that provides a command-line interface free market to players on your server.
