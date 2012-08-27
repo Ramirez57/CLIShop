@@ -235,16 +235,30 @@ public class Main extends JavaPlugin implements Listener {
 	    				int linestart = lineend-10;
 	    				int lines = 1;
 	    				player.sendMessage(ChatColor.RED + "|-----Page " + String.valueOf(page) + "-----|");
-	    				for(Material mat : Material.values()) {
-	    					if(mat.toString().equals(filter) || filter.equals("NONE")) {
-		    					List<String> sellers = sales.getStringList(mat.toString() + "." + "sellers");
-		    					for(Object seller : sellers.toArray()) {
-		    						if(lines >= linestart && lines <= lineend) {
-		    							player.sendMessage(ChatColor.BLUE + mc.getPlayer(String.valueOf(seller)).getName() + ChatColor.RED + " is selling " + ChatColor.YELLOW + String.valueOf(sales.getInt(mat.toString() + "." + seller + ".amount")) + " " + mat.toString() + ChatColor.RED + " for " + ChatColor.GREEN + String.valueOf(sales.getDouble(mat.toString() + "." + seller + "." + "cost")) + " " + economy.currencyNamePlural() + " per one.");
-		    						}
-		    						lines++;
+	    				if(config.getBoolean("shorthand")) { //The check is done first so it can process faster later.
+		    				for(Material mat : Material.values()) {
+		    					if(mat.toString().equals(filter) || filter.equals("NONE")) {
+			    					List<String> sellers = sales.getStringList(mat.toString() + "." + "sellers");
+			    					for(Object seller : sellers.toArray()) {
+			    						if(lines >= linestart && lines <= lineend) {
+			    							player.sendMessage(ChatColor.BLUE + mc.getPlayer(String.valueOf(seller)).getName() + ChatColor.RED + ": " + ChatColor.YELLOW + String.valueOf(sales.getInt(mat.toString() + "." + seller + ".amount")) + " " + mat.toString() + ChatColor.RED + " for " + ChatColor.GREEN + String.valueOf(sales.getDouble(mat.toString() + "." + seller + ".cost")) + " " + economy.currencyNamePlural() + " each.");
+			    						}
+			    						lines++;
+			    					}
 		    					}
-	    					}
+		    				}
+	    				} else {
+	    					for(Material mat : Material.values()) {
+		    					if(mat.toString().equals(filter) || filter.equals("NONE")) {
+			    					List<String> sellers = sales.getStringList(mat.toString() + "." + "sellers");
+			    					for(Object seller : sellers.toArray()) {
+			    						if(lines >= linestart && lines <= lineend) {
+			    								player.sendMessage(ChatColor.BLUE + mc.getPlayer(String.valueOf(seller)).getName() + ChatColor.RED + " is selling " + ChatColor.YELLOW + String.valueOf(sales.getInt(mat.toString() + "." + seller + ".amount")) + " " + mat.toString() + ChatColor.RED + " for " + ChatColor.GREEN + String.valueOf(sales.getDouble(mat.toString() + "." + seller + ".cost")) + " " + economy.currencyNamePlural() + " per one.");
+			    						}
+			    						lines++;
+			    					}
+		    					}
+		    				}
 	    				}
 	    				player.sendMessage(ChatColor.RED + "Type " + ChatColor.YELLOW + "/cs list " + String.valueOf(page+1) + ChatColor.RED +  " to see the next page");
 	    				return true;
