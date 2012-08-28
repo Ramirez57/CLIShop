@@ -9,3 +9,6 @@ B0.2 -
 * Added short-hand market (Enabled by default). [New]
 * Added (unimportant) aliases. [New]
 * Fixed permissions. [Fix]
+
+B0.3 -
+* Changed /cs to /cshop due to WorldEdit conflict. [Fix]
