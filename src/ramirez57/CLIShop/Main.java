@@ -86,23 +86,23 @@ public class Main extends JavaPlugin implements Listener {
 	}
 	
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
-	    if(cmd.getName().equalsIgnoreCase("cs")){
+	    if(cmd.getName().equalsIgnoreCase("cshop")){
 	    	if(isplayer(sender)) {
 	    		player = (Player)sender;
 	    		if(args.length > 0) {
 	    			if(args[0].equalsIgnoreCase("help")) {
-	    				sender.sendMessage(ChatColor.GOLD + "/cs help" + ChatColor.GRAY + " - Display help information");
-	    				sender.sendMessage(ChatColor.GOLD + "/cs sell " + ChatColor.GRAY + "- Sell amount of item for cost per one");
-	    				sender.sendMessage(ChatColor.GOLD + "/cs sell hand " + ChatColor.GRAY + "- Sell amount of what is in your hand for cost per one");
-	    				sender.sendMessage(ChatColor.GOLD + "/cs buy " + ChatColor.GRAY + "- Buy the amount of item from player");
-	    				sender.sendMessage(ChatColor.GOLD + "/cs list <page> <item> " + ChatColor.GRAY + "- Show the CLIShop market");
+	    				sender.sendMessage(ChatColor.GOLD + "/cshop help" + ChatColor.GRAY + " - Display help information");
+	    				sender.sendMessage(ChatColor.GOLD + "/cshop sell " + ChatColor.GRAY + "- Sell amount of item for cost per one");
+	    				sender.sendMessage(ChatColor.GOLD + "/cshop sell hand " + ChatColor.GRAY + "- Sell amount of what is in your hand for cost per one");
+	    				sender.sendMessage(ChatColor.GOLD + "/cshop buy " + ChatColor.GRAY + "- Buy the amount of item from player");
+	    				sender.sendMessage(ChatColor.GOLD + "/cshop list <page> <item> " + ChatColor.GRAY + "- Show the CLIShop market");
 	    				sender.sendMessage(ChatColor.LIGHT_PURPLE + "Type a command for further help on syntax.");
 	    				return true;
 	    			}
 	    			if(args[0].equalsIgnoreCase("sell")) {
 	    				if(args.length > 3) {
-	    					try {Integer.parseInt(args[2]);} catch(NumberFormatException e) {player.sendMessage("/cs sell [item] [amount] [cost_per_one]");return true;}
-	    					try {Double.parseDouble(args[3]);} catch(NumberFormatException e) {player.sendMessage("/cs sell [item] [amount] [cost_per_one]");return true;}
+	    					try {Integer.parseInt(args[2]);} catch(NumberFormatException e) {player.sendMessage("/cshop sell [item] [amount] [cost_per_one]");return true;}
+	    					try {Double.parseDouble(args[3]);} catch(NumberFormatException e) {player.sendMessage("/cshop sell [item] [amount] [cost_per_one]");return true;}
 	    					if(Double.parseDouble(args[3]) > config.getDouble("price_limit")) {
 	    						player.sendMessage(ChatColor.RED + "You may not set a price that high.");
 	    						player.sendMessage(ChatColor.RED + "Price limit is " + String.valueOf(config.getDouble("price_limit")));
@@ -160,13 +160,13 @@ public class Main extends JavaPlugin implements Listener {
 		    					return true;
 		    				}
 	    				} else {
-	    					player.sendMessage("/cs sell [item] [amount] [cost_per_one]");
+	    					player.sendMessage("/cshop sell [item] [amount] [cost_per_one]");
 	    					return true;
 	    				}
 	    			}
 	    			if(args[0].equalsIgnoreCase("buy")) {
 	    				if(args.length > 3) {
-	    					try{Integer.parseInt(args[3]);} catch(NumberFormatException e) {player.sendMessage("/cs buy [player] [item] [amount]");return true;}
+	    					try{Integer.parseInt(args[3]);} catch(NumberFormatException e) {player.sendMessage("/cshop buy [player] [item] [amount]");return true;}
 	    					material = Material.matchMaterial(args[2]);
 	    					if(material == null) {
 	    						player.sendMessage("What is " + args[2] + "?");
@@ -220,7 +220,7 @@ public class Main extends JavaPlugin implements Listener {
 	    						return true;
 	    					}
 	    				} else {
-	    					player.sendMessage("/cs buy [player] [item] [amount]");
+	    					player.sendMessage("/cshop buy [player] [item] [amount]");
 	    					return true;
 	    				}
 	    			}
@@ -260,7 +260,7 @@ public class Main extends JavaPlugin implements Listener {
 		    					}
 		    				}
 	    				}
-	    				player.sendMessage(ChatColor.RED + "Type " + ChatColor.YELLOW + "/cs list " + String.valueOf(page+1) + ChatColor.RED +  " to see the next page");
+	    				player.sendMessage(ChatColor.RED + "Type " + ChatColor.YELLOW + "/cshop list " + String.valueOf(page+1) + ChatColor.RED +  " to see the next page");
 	    				return true;
 	    			}
 	    		} else {
@@ -271,7 +271,7 @@ public class Main extends JavaPlugin implements Listener {
 	    		return true;
 	    	}
 	    }
-	    if(cmd.getName().equalsIgnoreCase("csadmin")) {
+	    if(cmd.getName().equalsIgnoreCase("cshopadmin")) {
 	    	if(args.length > 0) {
 	    		if(args[0].equalsIgnoreCase("reload")) {
 	    			reload();
