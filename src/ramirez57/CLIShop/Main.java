@@ -181,8 +181,10 @@ public class Main extends JavaPlugin implements Listener {
 	    							if(economy.getBalance(name) >= cost) {
 	    								economy.withdrawPlayer(name, cost);
 	    								economy.depositPlayer(args[1], cost);
-	    								if(mc.getPlayer(args[1]).isOnline()) {
-	    									mc.getPlayer(args[1]).sendMessage(ChatColor.GREEN + name + " has bought " + args[3] + " of your " + args[2] + "(" + cost + " " + economy.currencyNamePlural() + ")");
+	    								if(mc.getPlayer(args[1]) != null) {
+	    									if(mc.getPlayer(args[1]).isOnline()) {
+	    										mc.getPlayer(args[1]).sendMessage(ChatColor.GREEN + name + " has bought " + args[3] + " of your " + args[2] + "(" + cost + " " + economy.currencyNamePlural() + ")");
+	    									}
 	    								}
 	    							} else if(name.equalsIgnoreCase(args[1])) {
 	    								player.sendMessage(ChatColor.GREEN + "Taking item off the market...");
@@ -241,7 +243,7 @@ public class Main extends JavaPlugin implements Listener {
 			    					List<String> sellers = sales.getStringList(mat.toString() + "." + "sellers");
 			    					for(Object seller : sellers.toArray()) {
 			    						if(lines >= linestart && lines <= lineend) {
-			    							player.sendMessage(ChatColor.BLUE + mc.getPlayer(String.valueOf(seller)).getName() + ChatColor.RED + ": " + ChatColor.YELLOW + String.valueOf(sales.getInt(mat.toString() + "." + seller + ".amount")) + " " + mat.toString() + ChatColor.RED + " for " + ChatColor.GREEN + String.valueOf(sales.getDouble(mat.toString() + "." + seller + ".cost")) + " " + economy.currencyNamePlural() + " each.");
+			    							player.sendMessage(ChatColor.BLUE + String.valueOf(seller) + ChatColor.RED + ": " + ChatColor.YELLOW + String.valueOf(sales.getInt(mat.toString() + "." + seller + ".amount")) + " " + mat.toString() + ChatColor.RED + " for " + ChatColor.GREEN + String.valueOf(sales.getDouble(mat.toString() + "." + seller + ".cost")) + " " + economy.currencyNamePlural() + " each.");
 			    						}
 			    						lines++;
 			    					}
@@ -253,7 +255,7 @@ public class Main extends JavaPlugin implements Listener {
 			    					List<String> sellers = sales.getStringList(mat.toString() + "." + "sellers");
 			    					for(Object seller : sellers.toArray()) {
 			    						if(lines >= linestart && lines <= lineend) {
-			    								player.sendMessage(ChatColor.BLUE + mc.getPlayer(String.valueOf(seller)).getName() + ChatColor.RED + " is selling " + ChatColor.YELLOW + String.valueOf(sales.getInt(mat.toString() + "." + seller + ".amount")) + " " + mat.toString() + ChatColor.RED + " for " + ChatColor.GREEN + String.valueOf(sales.getDouble(mat.toString() + "." + seller + ".cost")) + " " + economy.currencyNamePlural() + " per one.");
+			    								player.sendMessage(ChatColor.BLUE + String.valueOf(seller) + ChatColor.RED + " is selling " + ChatColor.YELLOW + String.valueOf(sales.getInt(mat.toString() + "." + seller + ".amount")) + " " + mat.toString() + ChatColor.RED + " for " + ChatColor.GREEN + String.valueOf(sales.getDouble(mat.toString() + "." + seller + ".cost")) + " " + economy.currencyNamePlural() + " per one.");
 			    						}
 			    						lines++;
 			    					}
